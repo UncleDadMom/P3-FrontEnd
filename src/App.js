@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from "react"
 
 function App() {
+  const [gods, setGods] = useState([])
+  const [users, setUsers] = useState([])
+
+  useEffect(()=> {
+    fetch("http://localhost:9292/test")
+    .then(r=>r.json())
+    .then(gods=>setGods(gods))
+  },[])
+
+  useEffect(()=> {
+    fetch("http://localhost:9292/users")
+    .then(r=>r.json())
+    .then(user=>setUsers(user))
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="parent">
+        <div className="top"> 
+          <ul>
+            {users.map(user => <li>{user.username}</li>)}
+          </ul>
+          <div className="list">
+            <ul>
+            {gods.map(god => <li>{god.name}</li>)}
+            </ul>
+          </div>
+        </div>
     </div>
   );
 }
