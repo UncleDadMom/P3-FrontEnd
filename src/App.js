@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react"
+import BoonForm from './components/BoonForm'
 
 function App() {
   const [gods, setGods] = useState([])
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <div className="parent">
+    <BoonForm/> 
         <div className="top"> 
           <ul>
             {users.map(user => <li>{user.username}</li>)}
@@ -27,7 +29,7 @@ function App() {
             <ul>
             {gods.map(god => <li>{god.name}</li>)}
             </ul>
-          </div>
+          </div>  
         </div>
     </div>
   );
