@@ -18,12 +18,6 @@ const options = [
     { value: 'empty-inside', label: 'Empty Inside' }
   ]}];
   
-  const [selectedValue, setSelectedValue] = useState([]);
-
-//   const handleChange = (e) => {
-//       setSelectedValue(Array.isArray(e) ? e.map(x=> x.value) : [])
-//   }
-
 return (
     <div>
         <h3>ready to pick your boons? well then...</h3>
