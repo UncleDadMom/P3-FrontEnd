@@ -1,8 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react"
-
-import UserLogin from './components/UserLogin';
-import Gods from './components/Gods';
+import RunContainer from './components/RunContainer';
 
 function App() {
   const [users, setUsers] = useState([])
@@ -15,8 +13,7 @@ function App() {
 
   return (
     <div className="parent">
-    <UserLogin />
-    <Gods />
+    <RunContainer />
         <div className="top"> 
           <ul>
             {users.map(user => <li>{user.username}</li>)}
