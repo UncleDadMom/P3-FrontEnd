@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-function BoonForm(){
+function BoonForm({godId}){
 const [boons, setBoons] = useState([])
 
 useEffect(()=> {
-    fetch('http://localhost:9292/boons')
+    fetch(`http://localhost:9292/boons/${godId}`)
     .then(r=>r.json()
     .then(d => setBoons(d)))
 }, [])
 
-const options = boons.map(boon => ({ label: boon.god_id, options:[{ value: boon.id, label: boon.boon_name }]}))
+// useEffect(()=> {
+//     fetch(`http://localhost:9292/gods/`)
+//     .then(r=>r.json()
+//     .then(g => setSelectedGod(g)))
+// }, [])
+
+
+
+let options = boons.map((boon) => ({ key:boon.id, label: godId, options:[{ value: boon.description , label: boon.boon_name }]}))
 
 return (
     <div>

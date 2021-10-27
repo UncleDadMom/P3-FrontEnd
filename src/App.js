@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react"
-import BoonForm from './components/BoonForm'
+
 import UserLogin from './components/UserLogin';
 import Gods from './components/Gods';
 
@@ -15,7 +15,6 @@ function App() {
 
   return (
     <div className="parent">
-    <BoonForm/> 
     <UserLogin />
     <Gods />
         <div className="top"> 
