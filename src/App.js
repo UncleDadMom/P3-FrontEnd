@@ -1,16 +1,11 @@
 import './App.css';
 import { useState, useEffect } from "react"
 import BoonForm from './components/BoonForm'
+import UserLogin from './components/UserLogin';
+import Gods from './components/Gods';
 
 function App() {
-  const [gods, setGods] = useState([])
   const [users, setUsers] = useState([])
-
-  useEffect(()=> {
-    fetch("http://localhost:9292/test")
-    .then(r=>r.json())
-    .then(gods=>setGods(gods))
-  },[])
 
   useEffect(()=> {
     fetch("http://localhost:9292/users")
@@ -21,15 +16,12 @@ function App() {
   return (
     <div className="parent">
     <BoonForm/> 
+    <UserLogin />
+    <Gods />
         <div className="top"> 
           <ul>
             {users.map(user => <li>{user.username}</li>)}
-          </ul>
-          <div className="list">
-            <ul>
-            {gods.map(god => <li>{god.name}</li>)}
-            </ul>
-          </div>  
+          </ul> 
         </div>
     </div>
   );
