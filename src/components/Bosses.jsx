@@ -7,7 +7,8 @@ const [downedBoss, setDownedBoss] = useState({
     first_boss_down: false,
     second_boss_down: false,
     third_boss_down: false,
-    hades_down_down: false
+    hades_down: false,
+    boss_id: 4
 })
     useEffect(()=>{ 
         fetch("http://localhost:9292/bosses")
@@ -16,40 +17,66 @@ const [downedBoss, setDownedBoss] = useState({
     }, [])
 
     function handleSubmit(e){
-        e.target.default
+        e.preventDefault()
         addBoss(downedBoss)
+        console.log(downedBoss);
     }
 
-    function addBoss(downedBosses){
+    function addBoss(downedBoss){
         fetch("http://localhost:9292/beaten_bosses", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(downedBosses)
+            body: JSON.stringify(downedBoss)
         })
         .then(r=>r.json())
         .then(console.log)
     }
-    const handleClick = (e) =>{
-        alert('grats')
-       setDownedBoss(!downedBoss.first_boss_down)
-    }
+
     // const bossnameabossrray = bosses.map(b=> b.boss_name)
 
+    const changeFirstBossState = () => {
+        setDownedBoss({first_boss_down: true,
+            second_boss_down: false,
+            third_boss_down: false,
+            hades_down: false,
+            boss_id: 1
+        }) 
+    }
+   
+    const changeSecondBossState = () => {
+        setDownedBoss({first_boss_down: true,
+            second_boss_down: true,
+            third_boss_down: false,
+            hades_down: false,
+            boss_id: 2
+        }) 
+    }
+    const changeThirdBossState = () => {
+        setDownedBoss({first_boss_down: true,
+            second_boss_down: true,
+            third_boss_down: true,
+            hades_down: false,
+            boss_id: 3
+        }) 
+    }
+    const changeFinalBossState = () => {
+        setDownedBoss({first_boss_down: true,
+            second_boss_down: true,
+            third_boss_down: true,
+            hades_down: true,
+            boss_id: 4
+        }) 
+    }
 
     return(
         <form onSubmit={handleSubmit}>
         <h2>how far did you get???</h2>
-        <ol>
-        <h3>THE FURIES</h3>
-        <li><button onClick={handleClick}>{allBosses[0]?.boss_name}</button></li>
-        <li><button onClick={handleClick}>{allBosses[1]?.boss_name}</button></li>
-        <li><button onClick={handleClick}>{allBosses[2]?.boss_name}</button></li>
-        </ol>
-        <button onClick={handleClick}>{allBosses[3]?.boss_name}</button>
-        <button onClick={handleClick}>{allBosses[4]?.boss_name}</button>
-        <button onClick={handleClick}>{allBosses[5]?.boss_name}</button>
+        <button onClick={changeFirstBossState}>THE FURIES</button>
+        <button onClick={changeSecondBossState}>{allBosses[3]?.boss_name}</button>
+        <button onClick={changeThirdBossState}>{allBosses[4]?.boss_name}</button>
+        <button onClick={changeFinalBossState}>{allBosses[5]?.boss_name}</button>
         </form>
     )
 
