@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from "react"
 import RunContainer from './components/RunContainer';
 import UserLogin from './components/UserLogin'
+import styled from 'styled-components'
 
 function App() {
   const [users, setUsers] = useState([])
@@ -30,16 +31,24 @@ function App() {
    }
 
   return (
-    <div className="parent">
+    <>
+    <LoginStyle>
     <UserLogin userBase={userBase} setCurrentUser={setCurrentUser} />
+    </LoginStyle>
+    <div>
     <RunContainer currentUser={currentUser.value}/>
-        <div className="top"> 
-          <ul>
-            {users.map(user => <li>{user.username}</li>)}
-          </ul> 
-        </div>
     </div>
+    </>
   );
 }
 
 export default App;
+
+
+const LoginStyle = styled.div`
+  background: grey;
+  grid-area: nav;
+  padding: 0.25rem;
+  border: solid;
+  width: 50vw
+`

@@ -1,5 +1,26 @@
+import { Button } from "antd"
 import { useEffect, useState } from "react"
+import styled from 'styled-components'
 
+const FormStyle = styled.form`
+    border: solid;
+    width: 50vw;
+    padding: 0.25rem;
+    & button {
+            color: red;
+            background-color: black;
+            padding: 15px 45px;
+            font-family: Helvetica, sans-serif;     
+    }
+    & button:hover {
+    font-weight: bold;
+    color: black;
+    background-color: red;
+    background-position: right center; 
+            color: #fff;
+            text-decoration: none
+    }
+`
 
 function Bosses({currentUser}){
 const [allBosses, setAllBosses] = useState([])
@@ -49,6 +70,7 @@ const [downedBoss, setDownedBoss] = useState({
             hades_down: false,
             boss_id: 1
         }) 
+        alert("congrats on beating the Furies...")
     }
    
     const changeSecondBossState = () => {
@@ -58,6 +80,7 @@ const [downedBoss, setDownedBoss] = useState({
             hades_down: false,
             boss_id: 2
         }) 
+        alert("congrats on beating the freakin...Bone Hydra")
     }
     const changeThirdBossState = () => {
         setDownedBoss({first_boss_down: true,
@@ -66,6 +89,7 @@ const [downedBoss, setDownedBoss] = useState({
             hades_down: false,
             boss_id: 3
         }) 
+        alert("Theseus and Asterius? Dead as hell")
     }
     const changeFinalBossState = () => {
         setDownedBoss({first_boss_down: true,
@@ -73,19 +97,21 @@ const [downedBoss, setDownedBoss] = useState({
             third_boss_down: true,
             hades_down: true,
             boss_id: 4
-        }) 
+        })
+        alert("Woah you beat the game?? Please email me I need help") 
     }
 
     return(
-        <form onSubmit={handleSubmit}>
-        <h2>how far did you get???</h2>
+        <FormStyle onSubmit={handleSubmit}>
+        <h3>how far did you get? (hint: only attempt these once you have asked the Gods for help...)</h3>
         <button onClick={changeFirstBossState}>THE FURIES</button>
         <button onClick={changeSecondBossState}>{allBosses[3]?.boss_name}</button>
         <button onClick={changeThirdBossState}>{allBosses[4]?.boss_name}</button>
         <button onClick={changeFinalBossState}>{allBosses[5]?.boss_name}</button>
-        </form>
+        </FormStyle>
     )
 
 }
 
 export default Bosses
+

@@ -1,5 +1,31 @@
 import { useEffect, useState } from "react"
 import BoonForm from './BoonForm'
+import styled from 'styled-components'
+
+const GodsList = styled.div`
+  display: grid;
+  height: 25vh;
+  color: white;
+  grid-template-rows: 0.1fr .5fr 0.25fr 0.25fr;
+  grid-template-areas:
+    "nav nav nav nav"
+    "sidebar main main main"
+    "sidebar content content content"
+    "sidebar footer footer footer";
+  text-align: center;
+  grid-gap: 0.25rem;
+  padding-left: 10px;
+  width: 10px
+`
+const BoonSelector = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  justify-content: left;
+  grid-area: nav;
+  padding: 25px
+`
+
 
 function Gods(){
     const [gods, setGods] = useState([])
@@ -15,23 +41,39 @@ function Gods(){
         .then(gods=>setGods(gods))
       },[])
 
-    const handleLike = () =>{
-        setIsLiked(!isLiked)
+    const handleLike = (e) =>{
+        console.log(e.target.id)
+        setIsLiked(e.target.id)
     }
+
+
        
     return(
-        <div className="list">
+    <>
+      <GodsList>
         {gods.map(god => 
         <div key={god.id}>
-            <h2>{god.name}</h2>
-            <img id={god.id} onClick={godSelector} src={god.image}/>
-            <li>{god.title}</li>
-            <button onClick={handleLike}>{isLiked ? "⚔️" : "💀" }</button>
-        </div>)}
-        { (selectedGodId === 0) ? null : <BoonForm godId={selectedGodId}/>}
-      </div> 
+          <h2>{god.name}</h2>
+          <img 
+              id={god.id} 
+              onClick={godSelector} 
+              src={god.image}/>
+          <li>{god.title}</li>
+          <button 
+              id={god.id} 
+              onClick={godSelector}>
+              {selectedGodId === god.id ? "⚔️" : "💀" }
+          </button>
+        </div>)}  
+      </GodsList>
+      <BoonSelector> 
+      { (selectedGodId === 0) ? null : <BoonForm godId={selectedGodId}/>}
+      </BoonSelector>
+      </>
     )
 }
 
 
 export default Gods
+
+

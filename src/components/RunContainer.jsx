@@ -8,8 +8,9 @@ function RunContainer({currentUser}){
 
     return(
         <div>
-        <Gods />
         <Bosses currentUser={currentUser} />
+        <Gods />
+        
         </div>
     )
 
