@@ -2,14 +2,14 @@ import Gods from './Gods'
 import Bosses from './Bosses'
 
 
-function RunContainer(){
+function RunContainer({currentUser}){
 
 
 
     return(
         <div>
         <Gods />
-        <Bosses />
+        <Bosses currentUser={currentUser} />
         </div>
     )
 

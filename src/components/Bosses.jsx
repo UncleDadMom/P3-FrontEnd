@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 
-function Bosses(){
+function Bosses({currentUser}){
 const [allBosses, setAllBosses] = useState([])
 const [downedBoss, setDownedBoss] = useState({
     first_boss_down: false,
@@ -28,7 +28,13 @@ const [downedBoss, setDownedBoss] = useState({
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(downedBoss)
+            body: JSON.stringify({
+                user_id: currentUser,
+                first_boss_down: downedBoss.first_boss_down,
+                second_boss_down: downedBoss.second_boss_down,
+                third_boss_down: downedBoss.third_boss_down,
+                hades_down: downedBoss.hades_down,
+                boss_id: 4})
         })
         .then(r=>r.json())
         .then(console.log)
