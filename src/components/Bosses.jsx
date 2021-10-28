@@ -13,7 +13,7 @@ const FormStyle = styled.form`
             font-family: Helvetica, sans-serif;     
     }
     & button:hover {
-    font-weight: bold;
+    font-weight: bold
     color: black;
     background-color: red;
     background-position: right center; 
@@ -22,8 +22,9 @@ const FormStyle = styled.form`
     }
 `
 
-function Bosses({currentUser}){
+function Bosses({currentUser, currentBoons}){
 const [allBosses, setAllBosses] = useState([])
+const [mappedBoons, setMappedBoons] = useState([])
 const [downedBoss, setDownedBoss] = useState({
     first_boss_down: false,
     second_boss_down: false,
@@ -37,13 +38,21 @@ const [downedBoss, setDownedBoss] = useState({
         .then(b=>setAllBosses(b))
     }, [])
 
-    function handleSubmit(e){
-        e.preventDefault()
-        addBoss(downedBoss)
-        console.log(downedBoss);
+    function mapBoons(currentBoons){
+        let boons = currentBoons.e.map(boon=>boon.value)
+        let singleBoon = boons[0]
+        setMappedBoons(singleBoon)
     }
 
-    function addBoss(downedBoss){
+    function handleSubmit(e){
+        e.preventDefault()
+        mapBoons(currentBoons)
+        addBoss(downedBoss, mappedBoons)
+        console.log(downedBoss);
+        console.log(mappedBoons);
+    }
+
+    function addBoss(downedBoss, mappedBoons){
         fetch("http://localhost:9292/beaten_bosses", {
             method: "POST",
             headers: {
@@ -51,6 +60,7 @@ const [downedBoss, setDownedBoss] = useState({
             },
             body: JSON.stringify({
                 user_id: currentUser,
+                boon_id: mappedBoons, 
                 first_boss_down: downedBoss.first_boss_down,
                 second_boss_down: downedBoss.second_boss_down,
                 third_boss_down: downedBoss.third_boss_down,

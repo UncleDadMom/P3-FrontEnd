@@ -7,6 +7,7 @@ import styled from 'styled-components'
 function App() {
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState([])
+  
 
   useEffect(()=> {
     fetch("http://localhost:9292/users")
@@ -16,19 +17,7 @@ function App() {
 
   const userBase = users.map(user => ({key: user.id, label: user.name, options: [{ value: user.id, label: user.username }]}))
 
-   const createRun = (currentUser) => {
-    fetch("http://localhost:9292/runs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-          user_id: currentUser.value
-      })
-  })
-      .then(r=>r.json())
-      .then(console.log)
-   }
+  
 
   return (
     <>
@@ -36,7 +25,7 @@ function App() {
     <UserLogin userBase={userBase} setCurrentUser={setCurrentUser} />
     </LoginStyle>
     <div>
-    <RunContainer currentUser={currentUser.value}/>
+    <RunContainer currentUser={currentUser.value} />
     </div>
     </>
   );

@@ -35,7 +35,7 @@ const BoonSelector = styled.div`
 `
 
 
-function Gods(){
+function Gods({setCurrentBoons}){
     const [gods, setGods] = useState([])
     const [isLiked, setIsLiked] = useState(0)
     const [selectedGodId, setSelectedGodId] = useState(0)
@@ -73,7 +73,7 @@ function Gods(){
         </div>)}  
       </GodsList>
       <BoonSelector> 
-      { (selectedGodId === 0) ? null : <BoonForm godId={selectedGodId}/>}
+      { (selectedGodId === 0) ? null : <BoonForm godId={selectedGodId} setCurrentBoons={setCurrentBoons}/>}
       </BoonSelector>
       </>
     )

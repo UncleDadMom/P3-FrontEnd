@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-function BoonForm({godId}){
+function BoonForm({godId, setCurrentBoons}){
 const [boons, setBoons] = useState([])
+const [chosenBoons, setChosenBoons] = useState([{}])
 
 useEffect(()=> {
     fetch(`http://localhost:9292/boons/${godId}`)
@@ -10,15 +11,19 @@ useEffect(()=> {
     .then(d => setBoons(d)))
 }, [])
 
-// useEffect(()=> {
-//     fetch(`http://localhost:9292/gods/`)
-//     .then(r=>r.json()
-//     .then(g => setSelectedGod(g)))
-// }, [])
+const handleChange = (e) => {
+    setChosenBoons({
+        e
+    })
+    // const boonIds = chosenBoons.map(chosen => chosen.value )
+    // setCurrentBoons(boonIds)
+}
+
+setCurrentBoons(chosenBoons)
 
 
 
-let options = boons.map((boon) => ({ key:boon.id, label: godId, options:[{ value: boon.description , label: boon.boon_name }]}))
+let options = boons.map((boon) => ({ key:boon.id, label: godId, options:[{ value: boon.id , label: boon.boon_name }]}))
 
 return (
     <div>
@@ -30,6 +35,7 @@ return (
         className="basic-multi-select"
         classNamePrefix="select"
         placeholder="Select your boon(s)"    
+        onChange={handleChange}
         />
     </div>
 )
