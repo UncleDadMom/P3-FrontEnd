@@ -46,9 +46,10 @@ export default App;
 
 
 const LoginStyle = styled.div`
-  background: grey;
+  background: black;
+  color: red;
   grid-area: nav;
   padding: 0.25rem;
-  border: solid;
+  border: solid black;
   width: 50vw
 `

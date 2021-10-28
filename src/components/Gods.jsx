@@ -22,7 +22,12 @@ const GodsList = styled.div`
 `
 const BoonSelector = styled.div`
   display: flex;
-  gap: 0.25rem;
+  position: absolute;
+  border: solid;
+  color: red;
+  background: black;
+  top: 5;
+  right: 0;
   padding: 0.25rem;
   justify-content: left;
   grid-area: nav;
@@ -49,7 +54,9 @@ function Gods(){
        
     return(
     <>
-      <GodsList>
+    
+    <h2>select the god with your favorite boons</h2>
+      <GodsList>  
         {gods.map(god => 
         <div key={god.id}>
           <h2>{god.name}</h2>
