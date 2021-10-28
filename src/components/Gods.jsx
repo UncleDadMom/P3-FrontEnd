@@ -15,7 +15,10 @@ const GodsList = styled.div`
   text-align: center;
   grid-gap: 0.25rem;
   padding-left: 10px;
-  width: 10px
+  width: 10px;
+  & hover{
+    background: black;
+  }
 `
 const BoonSelector = styled.div`
   display: flex;
@@ -29,22 +32,18 @@ const BoonSelector = styled.div`
 
 function Gods(){
     const [gods, setGods] = useState([])
-    const [isLiked, setIsLiked] = useState(false)
+    const [isLiked, setIsLiked] = useState(0)
     const [selectedGodId, setSelectedGodId] = useState(0)
 
     function godSelector(e){
       setSelectedGodId(e.target.id)
+      setIsLiked(e.target.id)
     }
     useEffect(()=> {
         fetch("http://localhost:9292/gods")
         .then(r=>r.json())
         .then(gods=>setGods(gods))
       },[])
-
-    const handleLike = (e) =>{
-        console.log(e.target.id)
-        setIsLiked(e.target.id)
-    }
 
 
        
@@ -62,7 +61,7 @@ function Gods(){
           <button 
               id={god.id} 
               onClick={godSelector}>
-              {selectedGodId === god.id ? "⚔️" : "💀" }
+              {isLiked == god.id ? "⚔️" : "💀" }
           </button>
         </div>)}  
       </GodsList>
