@@ -2,6 +2,64 @@ import { useEffect, useState } from "react"
 import BoonForm from './BoonForm'
 import styled from 'styled-components'
 
+
+
+function Gods({setCurrentBoons}){
+    const [gods, setGods] = useState([])
+    const [isLiked, setIsLiked] = useState(0)
+    const [selectedGodId, setSelectedGodId] = useState(0)
+    const [selectedGodName, setSelectedGodName] = useState("")
+
+    function godSelector(e){
+      setSelectedGodId(e.target.id)
+      setIsLiked(e.target.id)
+      setSelectedGodName(e.target.name)
+    }
+
+    useEffect(()=> {
+        fetch("http://localhost:9292/gods")
+        .then(r=>r.json())
+        .then(gods=>setGods(gods))
+      },[])
+       
+    return(
+    <>
+    
+    <h2>select the god with your favorite boons...</h2>
+      <GodsList>  
+        {gods.map(god => 
+        <div key={god.id}>
+          <h2>{god.name}</h2>
+          <img 
+              id={god.id} 
+              onClick={godSelector} 
+              src={god.image}
+              name={god.name}
+              />
+          <li>{god.title}</li>
+          <button 
+              id={god.id} 
+              name={god.name}
+              onClick={godSelector}>
+              {isLiked == god.id ? "⚔️" : "💀" }
+          </button>
+        </div>)}  
+      </GodsList>
+      <BoonSelector> 
+      { (selectedGodId === 0) ? null : <BoonForm 
+        godId={selectedGodId} 
+        setCurrentBoons={setCurrentBoons}
+        god={selectedGodName}
+        />}
+      </BoonSelector>
+      </>
+    )
+}
+
+
+export default Gods
+
+
 const GodsList = styled.div`
   display: grid;
   height: 25vh;
@@ -22,7 +80,7 @@ const GodsList = styled.div`
 `
 const BoonSelector = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   border: solid;
   color: red;
   background: black;
@@ -33,53 +91,3 @@ const BoonSelector = styled.div`
   grid-area: nav;
   padding: 25px
 `
-
-
-function Gods({setCurrentBoons}){
-    const [gods, setGods] = useState([])
-    const [isLiked, setIsLiked] = useState(0)
-    const [selectedGodId, setSelectedGodId] = useState(0)
-
-    function godSelector(e){
-      setSelectedGodId(e.target.id)
-      setIsLiked(e.target.id)
-    }
-    useEffect(()=> {
-        fetch("http://localhost:9292/gods")
-        .then(r=>r.json())
-        .then(gods=>setGods(gods))
-      },[])
-
-
-       
-    return(
-    <>
-    
-    <h2>select the god with your favorite boons</h2>
-      <GodsList>  
-        {gods.map(god => 
-        <div key={god.id}>
-          <h2>{god.name}</h2>
-          <img 
-              id={god.id} 
-              onClick={godSelector} 
-              src={god.image}/>
-          <li>{god.title}</li>
-          <button 
-              id={god.id} 
-              onClick={godSelector}>
-              {isLiked == god.id ? "⚔️" : "💀" }
-          </button>
-        </div>)}  
-      </GodsList>
-      <BoonSelector> 
-      { (selectedGodId === 0) ? null : <BoonForm godId={selectedGodId} setCurrentBoons={setCurrentBoons}/>}
-      </BoonSelector>
-      </>
-    )
-}
-
-
-export default Gods
-
-

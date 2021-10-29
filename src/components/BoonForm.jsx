@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-function BoonForm({godId, setCurrentBoons}){
+function BoonForm({godId, setCurrentBoons, god}){
 const [boons, setBoons] = useState([])
 const [chosenBoons, setChosenBoons] = useState([{}])
 
@@ -27,7 +27,7 @@ let options = boons.map((boon) => ({ key:boon.id, label: godId, options:[{ value
 
 return (
     <div>
-        <h3>ready to pick your boons? well then...</h3>
+        <h3>ready to pick {god}'s boons? well then...</h3>
         <Select 
         isMulti
         name="boons"

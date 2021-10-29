@@ -114,9 +114,9 @@ const [downedBoss, setDownedBoss] = useState({
         <FormStyle onSubmit={handleSubmit}>
         <h3>how far did you get? (hint: only attempt these once you have asked the Gods for help...)</h3>
         <button onClick={changeFirstBossState}>THE FURIES</button>
-        <button onClick={changeSecondBossState}>{allBosses[3]?.boss_name}</button>
-        <button onClick={changeThirdBossState}>{allBosses[4]?.boss_name}</button>
-        <button onClick={changeFinalBossState}>{allBosses[5]?.boss_name}</button>
+        <button onClick={changeSecondBossState}>{allBosses[3]?.boss_name.toUpperCase()}</button>
+        <button onClick={changeThirdBossState}>{allBosses[4]?.boss_name.toUpperCase()}</button>
+        <button onClick={changeFinalBossState}>{allBosses[5]?.boss_name.toUpperCase()}</button>
         </FormStyle>
     )
 
