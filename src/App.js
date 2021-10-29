@@ -15,7 +15,7 @@ function App() {
     .then(user=>setUsers(user))
   },[])
 
-  const userBase = users.map(user => ({key: user.id, label: user.name, options: [{ value: user.id, label: user.username, runs: user.runs_logged}]}))
+  const userBase = users.map(user => ({ value: user.id, label: user.username, runs: user.runs_logged, boons: user.boons}))
 
   
 

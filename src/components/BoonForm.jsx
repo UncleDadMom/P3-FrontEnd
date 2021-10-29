@@ -16,10 +16,10 @@ const handleChange = (e) => {
         e
     })
     // const boonIds = chosenBoons.map(chosen => chosen.value )
-    // setCurrentBoons(boonIds)
+setCurrentBoons(chosenBoons)    // setCurrentBoons(boonIds)
 }
 
-setCurrentBoons(chosenBoons)
+
 
 
 

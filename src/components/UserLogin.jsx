@@ -1,23 +1,26 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Select from "react-select"
 import styled from 'styled-components'
 
 
 function UserLogin({userBase, setCurrentUser, currentUser}) {
-    const [runCount, setRunCount] = useState(0)
+    const [runCount, setRunCount] = useState()
     const [chosenBoons, setChosenBoons] = useState([])
 
     const handleChange = (e) => {
         setCurrentUser(e);
-            fetch(`http://localhost:9292/users/${currentUser.value}`)
+        setRunsAndBoons(e)
+
+    }
+
+    const setRunsAndBoons = (e) =>{
+        fetch(`http://localhost:9292/users/${currentUser.value}`)
             .then(r=>r.json())
             .then(user=>setRunCount(user.runs_logged))
             fetch(`http://localhost:9292/chosen_boons/${currentUser.value}`)
             .then(r=>r.json())
             .then(boon=>setChosenBoons(boon))
-
     }
-
     
 
     return(
@@ -44,7 +47,7 @@ function UserLogin({userBase, setCurrentUser, currentUser}) {
             </div>
             <h4>boons used (all-time):</h4>
             <div>
-            {chosenBoons.map(boon => <li>{boon.boon_name}</li>)}
+            {chosenBoons.map((boon) => <li key={boon.boon_id}>{boon.boon_name}</li>)}
             </div>
         </PlayerStyle>
         </>
