@@ -31,9 +31,9 @@ function UserLogin({userBase, setCurrentUser, currentUser}) {
                 {currentUser.runs}
             </div>
             <h4>boons used (all-time):</h4>
-            <div>
+            <LiStyle>
             {currentUser.boons ? currentUser.boons.map((boon) => <li key={boon.boon_id}>{boon.boon_name}</li>) : null }
-            </div>
+            </LiStyle>
             </PlayerStyle>
 
         </>
@@ -63,3 +63,17 @@ const PlayerStyle = styled.div`
   text-align: center;
   border: 
 `
+const LiStyle = styled.ul`
+    list-style:none;
+    background: white;
+    color: black;
+    max-height: 100px;
+    max-width: 200px;
+    margin: auto;
+    overflow:auto;
+    padding:0;
+    text-indent:10px;
+    & li{
+    line-height: 25px
+    }
+  `
