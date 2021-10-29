@@ -40,8 +40,7 @@ const [downedBoss, setDownedBoss] = useState({
 
     function mapBoons(currentBoons){
         let boons = currentBoons.e.map(boon=>boon.value)
-        let singleBoon = boons[0]
-        setMappedBoons(singleBoon)
+        setMappedBoons(boons)
     }
 
     function handleSubmit(e){
