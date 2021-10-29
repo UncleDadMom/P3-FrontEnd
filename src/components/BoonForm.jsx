@@ -8,7 +8,7 @@ useEffect(()=> {
     fetch(`http://localhost:9292/boons/${godId}`)
     .then(r=>r.json()
     .then(d => setBoons(d)))
-}, [])
+}, [godId])
 
 const handleChange = (e) => {
     setCurrentBoons(e)  
