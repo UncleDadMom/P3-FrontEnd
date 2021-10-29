@@ -5,17 +5,20 @@ import styled from 'styled-components'
 
 function UserLogin({userBase, setCurrentUser, currentUser}) {
     const [runCount, setRunCount] = useState(0)
+    const [chosenBoons, setChosenBoons] = useState([])
 
     const handleChange = (e) => {
         setCurrentUser(e);
+            fetch(`http://localhost:9292/users/${currentUser.value}`)
+            .then(r=>r.json())
+            .then(user=>setRunCount(user.runs_logged))
+            fetch(`http://localhost:9292/chosen_boons/${currentUser.value}`)
+            .then(r=>r.json())
+            .then(boon=>setChosenBoons(boon))
+
     }
 
-    useEffect(()=>{
-        fetch(`http://localhost:9292/users/${currentUser.value}`)
-        .then(r=>r.json())
-        .then(user=>setRunCount(user.runs_logged))
-    }, [currentUser])
-
+    
 
     return(
         <>
@@ -38,6 +41,10 @@ function UserLogin({userBase, setCurrentUser, currentUser}) {
             <h4>runs attempted:</h4>
             <div>
                 {currentUser.runs}
+            </div>
+            <h4>boons used (all-time):</h4>
+            <div>
+            {chosenBoons.map(boon => <li>{boon.boon_name}</li>)}
             </div>
         </PlayerStyle>
         </>
