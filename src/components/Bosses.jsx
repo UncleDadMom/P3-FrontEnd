@@ -24,7 +24,6 @@ const FormStyle = styled.form`
 
 function Bosses({currentUser, currentBoons}){
 const [allBosses, setAllBosses] = useState([])
-const [mappedBoons, setMappedBoons] = useState([])
 const [downedBoss, setDownedBoss] = useState({
     first_boss_down: false,
     second_boss_down: false,
@@ -38,17 +37,11 @@ const [downedBoss, setDownedBoss] = useState({
         .then(b=>setAllBosses(b))
     }, [])
 
-    function mapBoons(currentBoons){
-        let boons = currentBoons.e.map(boon=>boon.value)
-        setMappedBoons(boons)
-    }
 
     function handleSubmit(e){
         e.preventDefault()
-        mapBoons(currentBoons)
-        addBoss(downedBoss, mappedBoons)
-        console.log(downedBoss);
-        console.log(mappedBoons);
+        let boons = currentBoons.map(boon=>boon.value)
+        addBoss(downedBoss, boons)
     }
 
     function addBoss(downedBoss, mappedBoons){
@@ -67,7 +60,6 @@ const [downedBoss, setDownedBoss] = useState({
                 boss_id: 4})
         })
         .then(r=>r.json())
-        .then(console.log)
     }
 
     // const bossnameabossrray = bosses.map(b=> b.boss_name)

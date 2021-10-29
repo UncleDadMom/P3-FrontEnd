@@ -7,7 +7,7 @@ import UserLogin from './components/UserLogin'
 function App() {
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState([])
-  
+ 
 
   useEffect(()=> {
     fetch("http://localhost:9292/users")
@@ -17,11 +17,15 @@ function App() {
 
   const userBase = users.map(user => ({ value: user.id, label: user.username, runs: user.runs_logged, boons: user.boons}))
 
-  
+
+
+
 
   return (
     <>
-    <UserLogin userBase={userBase} setCurrentUser={setCurrentUser} currentUser={currentUser} />
+    <UserLogin userBase={userBase} 
+    setCurrentUser={setCurrentUser} 
+    currentUser={currentUser}  />
     <div>
     <RunContainer currentUser={currentUser.value} />
     </div>

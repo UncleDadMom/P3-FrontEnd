@@ -4,24 +4,10 @@ import styled from 'styled-components'
 
 
 function UserLogin({userBase, setCurrentUser, currentUser}) {
-    const [runCount, setRunCount] = useState()
-    const [chosenBoons, setChosenBoons] = useState([])
-
+    
     const handleChange = (e) => {
         setCurrentUser(e);
-        setRunsAndBoons(e)
-
     }
-
-    const setRunsAndBoons = (e) =>{
-        fetch(`http://localhost:9292/users/${currentUser.value}`)
-            .then(r=>r.json())
-            .then(user=>setRunCount(user.runs_logged))
-            fetch(`http://localhost:9292/chosen_boons/${currentUser.value}`)
-            .then(r=>r.json())
-            .then(boon=>setChosenBoons(boon))
-    }
-    
 
     return(
         <>
@@ -36,8 +22,7 @@ function UserLogin({userBase, setCurrentUser, currentUser}) {
                     onChange={handleChange}    
                 />
         </LoginStyle>
-        <PlayerStyle>
-            <h3>current player:</h3>
+          <PlayerStyle><h3>current player:</h3>
             <div>
                 {currentUser.label}
             </div>
@@ -47,9 +32,10 @@ function UserLogin({userBase, setCurrentUser, currentUser}) {
             </div>
             <h4>boons used (all-time):</h4>
             <div>
-            {chosenBoons.map((boon) => <li key={boon.boon_id}>{boon.boon_name}</li>)}
+            {currentUser.boons ? currentUser.boons.map((boon) => <li key={boon.boon_id}>{boon.boon_name}</li>) : null }
             </div>
-        </PlayerStyle>
+            </PlayerStyle>
+
         </>
     )
 }

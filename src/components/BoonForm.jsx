@@ -3,7 +3,6 @@ import Select from "react-select";
 
 function BoonForm({godId, setCurrentBoons, god}){
 const [boons, setBoons] = useState([])
-const [chosenBoons, setChosenBoons] = useState([{}])
 
 useEffect(()=> {
     fetch(`http://localhost:9292/boons/${godId}`)
@@ -12,11 +11,7 @@ useEffect(()=> {
 }, [])
 
 const handleChange = (e) => {
-    setChosenBoons({
-        e
-    })
-    // const boonIds = chosenBoons.map(chosen => chosen.value )
-setCurrentBoons(chosenBoons)    // setCurrentBoons(boonIds)
+    setCurrentBoons(e)  
 }
 
 
