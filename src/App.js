@@ -27,7 +27,7 @@ function App() {
     setCurrentUser={setCurrentUser} 
     currentUser={currentUser}  />
     <div>
-    <RunContainer currentUser={currentUser.value} />
+    <RunContainer currentUser={currentUser} />
     </div>
     </>
   );

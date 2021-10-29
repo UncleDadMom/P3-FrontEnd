@@ -51,7 +51,7 @@ const [downedBoss, setDownedBoss] = useState({
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                user_id: currentUser,
+                user_id: currentUser.id,
                 boon_id: mappedBoons, 
                 first_boss_down: downedBoss.first_boss_down,
                 second_boss_down: downedBoss.second_boss_down,
@@ -60,6 +60,7 @@ const [downedBoss, setDownedBoss] = useState({
                 boss_id: 4})
         })
         .then(r=>r.json())
+        .then(console.log)
     }
 
     // const bossnameabossrray = bosses.map(b=> b.boss_name)

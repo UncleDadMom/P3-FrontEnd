@@ -6,7 +6,10 @@ import styled from 'styled-components'
 function UserLogin({userBase, setCurrentUser, currentUser}) {
     
     const handleChange = (e) => {
-        setCurrentUser(e);
+        fetch(`http://localhost:9292/users/${e.value}`)
+        .then(r=>r.json())
+        .then((user)=>setCurrentUser(user))
+        console.log(`Played selected: ${e.label}`)
     }
 
     return(
@@ -24,11 +27,11 @@ function UserLogin({userBase, setCurrentUser, currentUser}) {
         </LoginStyle>
           <PlayerStyle><h3>current player:</h3>
             <div>
-                {currentUser.label}
+                {currentUser.username}
             </div>
             <h4>runs attempted:</h4>
             <div>
-                {currentUser.runs}
+                {currentUser.runs_logged}
             </div>
             <h4>boons used (all-time):</h4>
             <div>
